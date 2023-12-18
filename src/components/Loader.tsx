@@ -1,4 +1,6 @@
-const Loader = () => {
+import React from "react";
+
+const Loader: React.FC = () => {
   return (
     <div className="flex w-full h-full justify-center items-center text-center">
       <div role="status">

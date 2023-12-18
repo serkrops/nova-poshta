@@ -1,6 +1,7 @@
+import HistoryList from "./HistoryList";
 import TtnInfo from "./TtnInfo";
 
-const TTN = () => {
+const TTN: React.FC = () => {
   return (
     <div className="flex flex-col gap-3 md:flex-row w-full md:max-h-[80vh]">
       <div className="flex flex-col gap-3 w-full">
@@ -25,6 +26,7 @@ const TTN = () => {
         </div>
         <TtnInfo />
       </div>
+      <HistoryList />
     </div>
   );
 };

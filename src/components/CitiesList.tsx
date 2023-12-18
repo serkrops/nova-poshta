@@ -1,4 +1,4 @@
-const CitiesList = () => {
+const CitiesList: React.FC = () => {
   return (
     <div
       id="citiesListContaiter"
