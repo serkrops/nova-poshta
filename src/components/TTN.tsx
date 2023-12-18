@@ -1,12 +1,44 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import HistoryList from "./HistoryList";
 import TtnInfo from "./TtnInfo";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../types/types";
+import { fetchData } from "../store/thunks";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { UnknownAction } from "@reduxjs/toolkit";
 
 const TTN: React.FC = () => {
-  const { isMailShow } = useSelector((state: RootState) => state.data);
+  const dispatch = useDispatch();
+
+  const [documentNumber, setDocumentNumber] = useState<string>("");
+  const { ttn, isMailShow } = useSelector((state: RootState) => state.data);
   const ttnInputRef = useRef<HTMLInputElement>(null);
+
+  const handleOnSubmit = (e: React.FormEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    if (documentNumber.toString().length !== 14) {
+      toast("❗❗❗ Не вірний ТТН ❗❗❗");
+    } else {
+      dispatch(
+        fetchData(documentNumber.toString()) as unknown as UnknownAction
+      );
+    }
+  };
+
+  const handleOnInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    if (isNaN(+value)) {
+      toast("❗ Введіть номер ТТН ❗");
+    } else {
+      setDocumentNumber(value);
+    }
+  };
+
+  const handleOnInputClear = () => {
+    setDocumentNumber("");
+  };
 
   useEffect(() => {
     if (isMailShow) {
@@ -23,21 +55,25 @@ const TTN: React.FC = () => {
             type="text"
             className="bg-red-400/40 w-full shadow-lg shadow-red-700/30 rounded-xl p-3 text-white text-xl font-bold placeholder:text-white placeholder:text-xl focus:outline-0 focus:bg-red-500/60"
             placeholder="Введіть номер ТТН"
+            value={documentNumber}
+            onChange={handleOnInputChange}
           />
           <button
             type="submit"
             className="p-3 shadow-md shadow-red-700 bg-red-400/40 text-white font-bold text-xl hover:bg-red-500/90 rounded-xl"
+            onClick={handleOnSubmit}
           >
             🔍
           </button>
           <button
             type="button"
             className="p-3 shadow-md shadow-red-700 bg-red-400/40 text-white font-bold text-xl hover:bg-red-500/90 rounded-xl"
+            onClick={handleOnInputClear}
           >
             🗙
           </button>
         </div>
-        <TtnInfo />
+        <TtnInfo ttn={ttn} />
       </div>
       <HistoryList />
     </div>

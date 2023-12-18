@@ -4,6 +4,7 @@ import TTN from "./components/TTN";
 import Departments from "./components/Departments";
 import { useSelector } from "react-redux";
 import { RootState } from "./types/types";
+import { ToastContainer } from "react-toastify";
 
 export const App: React.FC = () => {
   const { isMailShow } = useSelector((state: RootState) => state.data);
@@ -19,6 +20,18 @@ export const App: React.FC = () => {
         <MainButtons />
         {isMailShow ? <TTN /> : <Departments />}
       </form>
+      <ToastContainer
+        position="top-right"
+        autoClose={1500}
+        hideProgressBar={true}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 };

@@ -5,6 +5,7 @@ import { DataState } from "../types/types";
 const initialState: DataState = {
   isLoading: false,
   isMailShow: true,
+  ttn: null,
 };
 
 export const dataSlice = createSlice({
@@ -23,7 +24,9 @@ export const dataSlice = createSlice({
       .addCase(fetchData.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(fetchData.fulfilled, (state) => {
+      .addCase(fetchData.fulfilled, (state, { payload }) => {
+        state.ttn = payload.data[0];
+
         state.isLoading = false;
       })
       .addCase(fetchData.rejected, (state) => {
