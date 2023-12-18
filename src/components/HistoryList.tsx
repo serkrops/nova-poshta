@@ -1,6 +1,6 @@
 import React from "react";
 
-const HistoryList = () => {
+const HistoryList: React.FC = () => {
   return (
     <div className="flex flex-col items-center gap-6 shadow-lg shadow-gray-700/40 rounded-xl text-white text-xl bg-slate-600/40 p-2 h-  <div>[35vh] md:min-h-[90vh] pr-0">
       <div className="flex flex-col gap-3 md:flex-row w-full pr-2">

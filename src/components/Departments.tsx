@@ -1,7 +1,7 @@
 import CitiesList from "./CitiesList";
 import WarehousesList from "./WarehousesList";
 
-const Departments = () => {
+const Departments: React.FC = () => {
   return (
     <div className="flex flex-col gap-3 w-full h-80 md:max-h-[70vh]">
       <div className="flex gap-3 shadow-md shadow-gray-700/40 rounded-xl bg-slate-600/40 p-2 w-full">
