@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const fetchData = createAsyncThunk(
   "data/fetchData",
-  async (documentNumber) => {
+  async (documentNumber: string) => {
     try {
       const response = await axios.post(
         "https://api.novaposhta.ua/v2.0/json/",
