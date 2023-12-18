@@ -1,3 +1,4 @@
+import HistoryList from "./HistoryList";
 import TtnInfo from "./TtnInfo";
 
 const TTN = () => {
@@ -25,6 +26,7 @@ const TTN = () => {
         </div>
         <TtnInfo />
       </div>
+      <HistoryList />
     </div>
   );
 };

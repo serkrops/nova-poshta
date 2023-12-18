@@ -8,6 +8,7 @@ const Departments = () => {
         <input
           type="text"
           className="bg-red-400/40 w-full shadow-lg shadow-red-700/30 rounded-xl p-3 text-white text-xl font-bold placeholder:text-white placeholder:text-xl focus:outline-0 focus:bg-red-500/60"
+          placeholder="Введіть назву міста"
         />
         <button
           type="button"
