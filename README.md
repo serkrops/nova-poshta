@@ -20,7 +20,7 @@ This is a simple web application for tracking parcels sent through the Nova Posh
 - ![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white)
 - ![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white)
 - Axios
-- React-Tostify
+- React-toastify
 - Prettier
 # 📌 Instruction:
 1. Clone repository
