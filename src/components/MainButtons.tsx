@@ -9,12 +9,10 @@ const MainButtons: React.FC = () => {
 
   const handleShowDepartments = () => {
     dispatch(showDepartments());
-    console.log(isMailShow);
   };
 
   const handleShowMail = () => {
     dispatch(showMail());
-    console.log(isMailShow);
   };
 
   return (

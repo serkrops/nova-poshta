@@ -1,14 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchData } from "./thunks";
+import { fetchData, fetchSearchingCities } from "./thunks";
 import { DataState } from "../types/types";
 
 const initialState: DataState = {
   isLoading: false,
+  isLoadingCities: false,
   isMailShow: true,
   ttn: null,
   history: localStorage.getItem("savedData")
     ? JSON.parse(localStorage.getItem("savedData") || "null")
     : [],
+  page: 1,
+  searchingCities: [],
 };
 
 export const dataSlice = createSlice({
@@ -24,7 +27,7 @@ export const dataSlice = createSlice({
     clearHistory: (state) => {
       state.history = [];
       localStorage.removeItem("savedData");
-    }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -44,6 +47,18 @@ export const dataSlice = createSlice({
       })
       .addCase(fetchData.rejected, (state) => {
         state.isLoading = false;
+      })
+      .addCase(fetchSearchingCities.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchSearchingCities.fulfilled, (state, { payload }) => {
+        if (state.page === 1) {
+          state.searchingCities = payload.data;
+        } else {
+          state.searchingCities = state.searchingCities.concat(payload.data);
+          console.log(state.searchingCities);          
+        }
+        state.isLoadingCities = false;
       });
   },
 });
