@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchData, fetchSearchingCities } from "./thunks";
+import { fetchData, fetchSearchingCities, fetchWarehouses } from "./thunks";
 import { DataState } from "../types/types";
 
 const initialState: DataState = {
   isLoading: false,
   isLoadingCities: false,
+  isLoadingWarehouses: false,
   isMailShow: true,
   ttn: null,
   history: localStorage.getItem("savedData")
@@ -12,6 +13,7 @@ const initialState: DataState = {
     : [],
   page: 1,
   searchingCities: [],
+  warehouses: [],
 };
 
 export const dataSlice = createSlice({
@@ -34,6 +36,9 @@ export const dataSlice = createSlice({
     refreshPage: (state) => {
       state.page = 1;
     },
+    clearWarehouses: (state) => {
+      state.warehouses = [];
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -47,7 +52,6 @@ export const dataSlice = createSlice({
             state.history = [payload.data[0].Number, ...state.history];
             localStorage.setItem("savedData", JSON.stringify(state.history));
           }
-
           state.isLoading = false;
         }
       })
@@ -64,11 +68,30 @@ export const dataSlice = createSlice({
           state.searchingCities = state.searchingCities.concat(payload.data);
         }
         state.isLoadingCities = false;
+      })
+      .addCase(fetchSearchingCities.rejected, (state) => {
+        state.isLoadingCities = false;
+      })
+      .addCase(fetchWarehouses.pending, (state) => {
+        state.isLoadingWarehouses = true;
+      })
+      .addCase(fetchWarehouses.fulfilled, (state, { payload }) => {
+        state.warehouses = payload.data;
+        state.isLoadingWarehouses = false;
+      })
+      .addCase(fetchWarehouses.rejected, (state) => {
+        state.isLoadingWarehouses = false;
       });
   },
 });
 
-export const { showMail, showDepartments, clearHistory, addPage, refreshPage } =
-  dataSlice.actions;
+export const {
+  showMail,
+  showDepartments,
+  clearHistory,
+  addPage,
+  refreshPage,
+  clearWarehouses,
+} = dataSlice.actions;
 
 export default dataSlice.reducer;

@@ -1,8 +1,9 @@
 import { useEffect, useRef } from "react";
 import CitiesList from "./CitiesList";
 import WarehousesList from "./WarehousesList";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../types/types";
+import { clearWarehouses } from "../store/dataSlice";
 
 type Props = {
   setSearchCity: React.Dispatch<React.SetStateAction<string>>;
@@ -10,6 +11,7 @@ type Props = {
 };
 
 const Departments: React.FC<Props> = ({ setSearchCity, searchCity }) => {
+  const dispatch = useDispatch();
   const { isMailShow } = useSelector((state: RootState) => state.data);
   const cityInputRef = useRef<HTMLInputElement>(null);
 
@@ -21,6 +23,7 @@ const Departments: React.FC<Props> = ({ setSearchCity, searchCity }) => {
 
   const handleInputClear = () => {
     setSearchCity("");
+    dispatch(clearWarehouses());
   };
 
   return (
