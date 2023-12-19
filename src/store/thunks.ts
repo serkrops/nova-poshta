@@ -1,25 +1,30 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import {
+  API_KEY,
+  API_METHOD_NAME,
+  API_MODEL_NAME,
+  API_URL,
+  ASYNC_THUNKS,
+  LIMIT,
+} from "../constants/constants";
 
 export const fetchData = createAsyncThunk(
-  "data/fetchData",
+  ASYNC_THUNKS.fetchData,
   async (documentNumber: string) => {
     try {
-      const response = await axios.post(
-        "https://api.novaposhta.ua/v2.0/json/",
-        {
-          apiKey: "404109fd03ac21ede6f6690a7103817c",
-          modelName: "TrackingDocument",
-          calledMethod: "getStatusDocuments",
-          methodProperties: {
-            Documents: [
-              {
-                DocumentNumber: documentNumber,
-              },
-            ],
-          },
-        }
-      );
+      const response = await axios.post(API_URL, {
+        apiKey: API_KEY,
+        modelName: API_MODEL_NAME.TrackingDocument,
+        calledMethod: API_METHOD_NAME.getStatusDocuments,
+        methodProperties: {
+          Documents: [
+            {
+              DocumentNumber: documentNumber,
+            },
+          ],
+        },
+      });
 
       return response.data;
     } catch (error) {
@@ -29,22 +34,19 @@ export const fetchData = createAsyncThunk(
 );
 
 export const fetchSearchingCities = createAsyncThunk(
-  "data/fetchSearchingCities",
+  ASYNC_THUNKS.fetchSearchingCities,
   async ({ page, searchCity }: { page: number; searchCity: string }) => {
     try {
-      const response = await axios.post(
-        "https://api.novaposhta.ua/v2.0/json/",
-        {
-          apiKey: "404109fd03ac21ede6f6690a7103817c",
-          modelName: "Address",
-          calledMethod: "getCities",
-          methodProperties: {
-            Page: page,
-            FindByString: searchCity.trim(),
-            Limit: "20",
-          },
-        }
-      );
+      const response = await axios.post(API_URL, {
+        apiKey: API_KEY,
+        modelName: API_MODEL_NAME.Address,
+        calledMethod: API_METHOD_NAME.getCities,
+        methodProperties: {
+          Page: page,
+          FindByString: searchCity.trim(),
+          Limit: LIMIT,
+        },
+      });
 
       return response.data;
     } catch (error) {
@@ -54,20 +56,17 @@ export const fetchSearchingCities = createAsyncThunk(
 );
 
 export const fetchWarehouses = createAsyncThunk(
-  "data/fetchWarehouse",
+  ASYNC_THUNKS.fetchWarehouses,
   async (ref: string) => {
     try {
-      const response = await axios.post(
-        "https://api.novaposhta.ua/v2.0/json/",
-        {
-          apiKey: "404109fd03ac21ede6f6690a7103817c",
-          modelName: "Address",
-          calledMethod: "getWarehouses",
-          methodProperties: {
-            CityRef: ref,
-          },
-        }
-      );
+      const response = await axios.post(API_URL, {
+        apiKey: API_KEY,
+        modelName: API_MODEL_NAME.Address,
+        calledMethod: API_METHOD_NAME.getWarehouses,
+        methodProperties: {
+          CityRef: ref,
+        },
+      });
 
       return response.data;
     } catch (error) {

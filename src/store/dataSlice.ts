@@ -1,20 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchData, fetchSearchingCities, fetchWarehouses } from "./thunks";
-import { DataState } from "../types/types";
-
-const initialState: DataState = {
-  isLoading: false,
-  isLoadingCities: false,
-  isLoadingWarehouses: false,
-  isMailShow: true,
-  ttn: null,
-  history: localStorage.getItem("savedData")
-    ? JSON.parse(localStorage.getItem("savedData") || "null")
-    : [],
-  page: 1,
-  searchingCities: [],
-  warehouses: [],
-};
+import { initialState } from "../constants/constants";
 
 export const dataSlice = createSlice({
   name: "data",
