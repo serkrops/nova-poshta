@@ -7,6 +7,7 @@ export interface DataState {
   isLoading: boolean;
   isMailShow: boolean;
   ttn: TTN | null;
+  history: string[] | [];
 }
 
 export interface TTN {

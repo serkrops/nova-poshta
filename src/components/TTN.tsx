@@ -48,7 +48,7 @@ const TTN: React.FC = () => {
 
   return (
     <div className="flex flex-col gap-3 md:flex-row w-full md:max-h-[80vh]">
-      <div className="flex flex-col gap-3 w-full">
+      <div className="flex flex-col gap-3 w-full md:w-2/3">
         <div className="flex gap-2 p-2 w-full shadow-md shadow-gray-700/40 rounded-xl bg-slate-600/40">
           <input
             ref={ttnInputRef}
@@ -75,7 +75,7 @@ const TTN: React.FC = () => {
         </div>
         <TtnInfo ttn={ttn} />
       </div>
-      <HistoryList />
+      <HistoryList setDocumentNumber={setDocumentNumber} />
     </div>
   );
 };
