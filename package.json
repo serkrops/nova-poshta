@@ -2,6 +2,7 @@
   "name": "nova-poshta",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://serkrops.github.io/nova-poshta",
   "dependencies": {
     "@reduxjs/toolkit": "^2.0.1",
     "@testing-library/jest-dom": "^5.17.0",
@@ -19,7 +20,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -43,6 +46,7 @@
     "@babel/preset-typescript": "^7.23.3",
     "@types/react": "^18.2.45",
     "@types/react-dom": "^18.2.18",
+    "gh-pages": "^6.1.0",
     "tailwindcss": "^3.3.6"
   }
 }
