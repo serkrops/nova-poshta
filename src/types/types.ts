@@ -6,11 +6,13 @@ export interface RootState {
 export interface DataState {
   isLoading: boolean;
   isLoadingCities: boolean;
+  isLoadingWarehouses: boolean;
   isMailShow: boolean;
   ttn: TTN | null;
   history: string[] | [];
   page: number;
   searchingCities: City[] | [];
+  warehouses: Warehouses[] | [];
 }
 
 export interface TTN {
@@ -23,4 +25,8 @@ export interface TTN {
 export interface City {
   Description: string;
   Ref: string;
+}
+
+export interface Warehouses {
+  Description: string;
 }
