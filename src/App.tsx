@@ -7,6 +7,7 @@ import { RootState } from "./types/types";
 import { ToastContainer } from "react-toastify";
 import { fetchSearchingCities } from "./store/thunks";
 import { UnknownAction } from "redux";
+import { refreshPage } from "./store/dataSlice";
 
 export const App: React.FC = () => {
   const dispatch = useDispatch();
@@ -26,6 +27,10 @@ export const App: React.FC = () => {
 
     return () => clearTimeout(timerId);
   }, [dispatch, page, searchCity]);
+
+  useEffect(() => {
+    dispatch(refreshPage());
+  }, [dispatch, searchCity]);
 
   const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
