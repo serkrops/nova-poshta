@@ -28,6 +28,12 @@ export const dataSlice = createSlice({
       state.history = [];
       localStorage.removeItem("savedData");
     },
+    addPage: (state) => {
+      state.page += 1;
+    },
+    refreshPage: (state) => {
+      state.page = 1;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -56,13 +62,13 @@ export const dataSlice = createSlice({
           state.searchingCities = payload.data;
         } else {
           state.searchingCities = state.searchingCities.concat(payload.data);
-          console.log(state.searchingCities);          
         }
         state.isLoadingCities = false;
       });
   },
 });
 
-export const { showMail, showDepartments, clearHistory } = dataSlice.actions;
+export const { showMail, showDepartments, clearHistory, addPage, refreshPage } =
+  dataSlice.actions;
 
 export default dataSlice.reducer;

@@ -1,9 +1,32 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { City, RootState } from "../types/types";
+import { useEffect } from "react";
+import { addPage } from "../store/dataSlice";
 
 const CitiesList: React.FC = () => {
+  const dispatch = useDispatch();
   const { searchingCities } = useSelector((state: RootState) => state.data);
- 
+
+  useEffect(() => {
+    const citiesListContaiter = document.getElementById("citiesListContaiter");
+
+    const scrollHandler = () => {
+      const newFetch =
+        citiesListContaiter.clientHeight + citiesListContaiter.scrollTop >=
+        citiesListContaiter.scrollHeight - 30;
+
+      if (newFetch) {
+        dispatch(addPage());
+      }
+    };
+
+    citiesListContaiter.addEventListener("scroll", scrollHandler);
+
+    return function () {
+      citiesListContaiter.removeEventListener("scroll", scrollHandler);
+    };
+  }, [dispatch]);
+
   return (
     <div
       id="citiesListContaiter"
