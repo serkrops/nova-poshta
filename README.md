@@ -1,5 +1,7 @@
 # ✉️ About
 This is a simple web application for tracking parcels sent through the Nova Poshta company, created based on React.
+# 👀 Demo
+[Nova Poshta](https://serkrops.github.io/nova-poshta/)
 # 📋 Technical Specification for the Project:
 1. The user enters the TTN number or their invoice number in the input field on the page.
 2. The application sends a request to obtain data on the current delivery status of the product.
@@ -20,7 +22,8 @@ This is a simple web application for tracking parcels sent through the Nova Posh
 - ![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white)
 - ![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white)
 - Axios
-- React-toastify
+- React-Intersection-Observer
+- React-Toastify
 - Prettier
 # 📌 Instruction:
 1. Clone repository
