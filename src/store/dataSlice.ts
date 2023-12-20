@@ -25,6 +25,9 @@ export const dataSlice = createSlice({
     clearWarehouses: (state) => {
       state.warehouses = [];
     },
+    clearTtnInfo: (state) => {
+      state.ttn = null;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -78,6 +81,7 @@ export const {
   addPage,
   refreshPage,
   clearWarehouses,
+  clearTtnInfo,
 } = dataSlice.actions;
 
 export default dataSlice.reducer;

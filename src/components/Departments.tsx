@@ -42,7 +42,7 @@ const Departments: React.FC<Props> = ({ setSearchCity, searchCity }) => {
           className="p-3 shadow-md shadow-red-700 bg-red-400/40 text-white font-bold text-xl hover:bg-red-500/90 rounded-xl"
           onClick={handleInputClear}
         >
-          🗙
+          ❌
         </button>
       </div>
       <div className="flex flex-col gap-3 w-full md:flex-row md:h-screen">

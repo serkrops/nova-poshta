@@ -15,11 +15,18 @@ const TTN: React.FC = () => {
   const { ttn, isMailShow } = useSelector((state: RootState) => state.data);
   const ttnInputRef = useRef<HTMLInputElement>(null);
 
+  const checkTtnValidation = (ttn: string) => {
+    return ttn.split("").every((item) => !isNaN(+item));
+  };
+
   const handleOnSubmit = (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    if (documentNumber.toString().length !== 14) {
-      toast("❗❗❗ Не вірний ТТН ❗❗❗");
+    if (
+      documentNumber.toString().length !== 14 ||
+      !checkTtnValidation(documentNumber)
+    ) {
+      toast("❗ Введіть номер ТТН довжиною 14 цифр у форматі: 00000000000000");
     } else {
       dispatch(
         fetchData(documentNumber.toString()) as unknown as UnknownAction
@@ -28,12 +35,7 @@ const TTN: React.FC = () => {
   };
 
   const handleOnInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    if (isNaN(+value)) {
-      toast("❗ Введіть номер ТТН ❗");
-    } else {
-      setDocumentNumber(value);
-    }
+    setDocumentNumber(e.target.value);
   };
 
   const handleOnInputClear = () => {
@@ -47,14 +49,14 @@ const TTN: React.FC = () => {
   }, [isMailShow]);
 
   return (
-    <div className="flex flex-col gap-3 md:flex-row w-full md:max-h-[80vh]">
-      <div className="flex flex-col gap-3 w-full md:w-2/3">
+    <div className="flex flex-col gap-3 md:flex-row w-full">
+      <div className="flex flex-col gap-3 w-full">
         <div className="flex gap-2 p-2 w-full shadow-md shadow-gray-700/40 rounded-xl bg-slate-600/40">
           <input
             ref={ttnInputRef}
             type="text"
             className="bg-red-400/40 w-full shadow-lg shadow-red-700/30 rounded-xl p-3 text-white text-xl font-bold placeholder:text-white placeholder:text-xl focus:outline-0 focus:bg-red-500/60"
-            placeholder="Введіть номер ТТН"
+            placeholder="Введіть ТТН"
             value={documentNumber}
             onChange={handleOnInputChange}
           />
@@ -70,12 +72,14 @@ const TTN: React.FC = () => {
             className="p-3 shadow-md shadow-red-700 bg-red-400/40 text-white font-bold text-xl hover:bg-red-500/90 rounded-xl"
             onClick={handleOnInputClear}
           >
-            🗙
+            ❌
           </button>
         </div>
-        <TtnInfo ttn={ttn} />
+        <div className="flex gap-3 flex-col md:flex-row md:max-h-[80vh]">
+          <TtnInfo ttn={ttn} />
+          <HistoryList setDocumentNumber={setDocumentNumber} />
+        </div>
       </div>
-      <HistoryList setDocumentNumber={setDocumentNumber} />
     </div>
   );
 };
