@@ -12,7 +12,7 @@ export interface DataState {
   history: string[] | [];
   page: number;
   searchingCities: City[] | [];
-  warehouses: Warehouses[] | [];
+  warehouses: Warehouse[] | [];
 }
 
 export interface TTN {
@@ -27,6 +27,6 @@ export interface City {
   Ref: string;
 }
 
-export interface Warehouses {
+export interface Warehouse {
   Description: string;
 }
